@@ -1,8 +1,12 @@
+import Head from 'next/head';
 import fetch from 'isomorphic-unfetch';
 
 const Home = ({ streams }) => {
   return (
     <div className="container">
+      <Head>
+        <title>mtv</title>
+      </Head>
       {streams.map(s => (
         <div key={s.id} className="stream">
           <a
@@ -13,7 +17,7 @@ const Home = ({ streams }) => {
             target="_new"
           >
             <div>
-              <img src={s.icon} alt={s.id} style={{ height: '96px' }} />
+              <img src={s.icon} alt={s.id} />
               <h4>{s.name}</h4>
             </div>
           </a>
@@ -21,7 +25,8 @@ const Home = ({ streams }) => {
       ))}
       <style jsx>{`
         .container {
-          width: 1000px;
+          background: lightgray
+          width: 890px;
           margin: auto;
           display: flex;
           flex-direction: row;
@@ -29,11 +34,10 @@ const Home = ({ streams }) => {
           justify-content: space-around;
         }
         .stream {
-          background: white;
-          width: 192px;
+          background: black;
+          width: 128px;
           text-align: center;
-          padding: 32px;
-          border: 0.4px solid gray;
+          padding: 16px;
           margin: 16px;
         }
 
@@ -41,7 +45,8 @@ const Home = ({ streams }) => {
           color: gray;
         }
         img {
-          background: lightgray;
+          background: transparent;
+          height: 106px;
         }
       `}</style>
     </div>
@@ -52,7 +57,7 @@ Home.getInitialProps = async () => {
   const { MEDIABAG = 'http://192.168.2.14:8080/mediabag/' } = process.env;
   const response = await fetch(MEDIABAG);
   const streams = await response.json();
-  return { streams };
+  return { streams: streams.filter(x => x.name !== 'm5') };
 };
 
 export default Home;

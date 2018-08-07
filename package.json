@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "next",
+    "dev": "next -p ${PORT:-3333}",
     "prestart": "npm run build",
-    "start": "next start",
+    "start": "next start -p ${PORT:-3333}",
     "build": "next build",
     "preexport": "npm run build",
     "export": "next export",
