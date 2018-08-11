@@ -10,10 +10,7 @@ const Home = ({ streams }) => {
       {streams.map(s => (
         <div key={s.id} className="stream">
           <a
-            href={s.url.replace(
-              'http://piserver:8080/mediabag/proxy/mediaklikk/',
-              'https://mediaklikk.now.sh/'
-            )}
+            href={s.url}
             target="_new"
           >
             <div>
